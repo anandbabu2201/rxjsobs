@@ -5,10 +5,9 @@ import { getData }  from '../actions/dataActions'
 class Button extends Component {
 
     render(){
-        const {} = this.props.data | []
         return (
             <React.Fragment>
-            <button onClick={this.props.getData()}> Get Data </button>
+            <button onClick={this.props.getData}> Get Data </button>
             <div>
 
             </div>
@@ -18,6 +17,6 @@ class Button extends Component {
 }
 
 const mapStateToProps = state =>({
-  data : state.data.apiData
+  data : state.apiData
 })
 export default connect(mapStateToProps,{getData})(Button);
