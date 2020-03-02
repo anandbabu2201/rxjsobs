@@ -11,8 +11,8 @@ export default function (state = initialState,action){
             case FETCHING_DATASUCESS : 
                return { ...state ,loading:false, data:action.payload}
             case FETCHING_FAILURE : 
-               return { ...state, loading:false}
+               return { ...state, loading:false,error:'error occured'}
             default :
-                return { ...state}
+                return state;
         }
     }

@@ -1,11 +1,20 @@
 import {createStore,applyMiddleware,compose} from 'redux';
-import thunk from 'redux-thunk'
-import rootReducer from '../reducer'
+import { createEpicMiddleware } from 'redux-observable';
+import rootReducer from '../reducers';
+import rootEpic from '../epics'
 
 const initialState = {};
 
-const middleWare= [thunk];
+const epicMiddlWare  = createEpicMiddleware(); // redux observables 
+
+const middleWare= [epicMiddlWare]; 
+
+const composeEnhancer = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION__ ?
+window.__REDUX_DEVTOOLS_EXTENSION__():compose;
+
 const store = createStore(rootReducer,initialState,compose(applyMiddleware(...middleWare),
-window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+composeEnhancer));
+
+epicMiddlWare.run(rootEpic);
 
 export default store;
